@@ -1,0 +1,6 @@
+{
+  "name": "Color Shifting Gradient Display",
+  "description": "A React web application that displays an aesthetically pleasing, color-shifting gradient element using Tailwind CSS for styling. The gradient animates smoothly through a predefined set of colors.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
