@@ -24,14 +24,33 @@ Visit the live site: [https://Peteryhs.github.io/HTR25-Teaser](https://Peteryhs.
 
 ## Deploy to GitHub Pages
 
-This project is configured for automatic deployment to GitHub Pages.
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
 
-### Automatic Deployment (Recommended)
+### Setup GitHub Pages (One-time setup)
 
-1. Push your changes to the `main` branch
-2. The GitHub Action will automatically build and deploy to GitHub Pages
+1. Go to your repository on GitHub
+2. Click on "Settings" tab
+3. Scroll down to "Pages" in the left sidebar
+4. Under "Source", select "GitHub Actions"
+5. Save the settings
 
-### Manual Deployment
+### Automatic Deployment
+
+1. Push your changes to the `main` branch:
+   ```bash
+   git add .
+   git commit -m "Deploy to GitHub Pages"
+   git push origin main
+   ```
+
+2. The GitHub Action will automatically:
+   - Build the project
+   - Deploy to GitHub Pages
+   - Make it available at: https://Peteryhs.github.io/HTR25-Teaser
+
+### Manual Deployment (Alternative)
+
+If you prefer manual deployment using gh-pages package:
 
 1. Build the project:
    ```bash
