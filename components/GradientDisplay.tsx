@@ -192,10 +192,10 @@ const GradientDisplay: React.FC = () => {
       <div
         className="absolute font-bold text-white"
         style={{
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: 'var(--special-font, "VT323", monospace)',
           bottom: 'clamp(1rem, 4vh, 2rem)',
           right: 'clamp(2rem, 6vw, 4rem)',
-          fontSize: 'clamp(6rem, 12vw, 7rem)',
+          fontSize: 'clamp(8rem, 16vw, 10rem)',
           zIndex: 1,
           textShadow: '0px 0px 10px rgba(0,0,0,0.2)',
         }}
