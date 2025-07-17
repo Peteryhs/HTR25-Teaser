@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode cloudflare",
+    "dev:gh": "vite",
     "build": "vite build",
+    "build:cf": "vite build --mode cloudflare",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "deploy:cf": "npm run build:cf"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -17,8 +20,11 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.7.2",
-    "vite": "^6.2.0",
-    "gh-pages": "^6.0.0"
+    "vite": "^6.2.0"
   }
 }
