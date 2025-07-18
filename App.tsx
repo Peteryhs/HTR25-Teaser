@@ -98,7 +98,7 @@ const App: React.FC = () => {
                   '--logo-width': '600px',
                   '--logo-height': '600px',
                   '--logo-translate-x': '0px',
-                  '--logo-translate-y': '100px',
+                  '--logo-translate-y': '80px',
                   '--logo-margin-top': '0px',
                   '--logo-margin-bottom': '-20px',
                   
@@ -111,15 +111,15 @@ const App: React.FC = () => {
                   '--year-margin-top': '0px',
                   '--year-margin-bottom': '0px',
                   '--hack-translate-x': '0px',
-                  '--hack-translate-y': '-80px',
+                  '--hack-translate-y': '-130px',
                   '--year-translate-x': '0px',
-                  '--year-translate-y': '-150px',
+                  '--year-translate-y': '-138px',
                   '--title-container-translate-x': '0px',
                   '--title-container-translate-y': '0px',
                   
                   // Date section controls
                   '--date-container-translate-x': '0px',
-                  '--date-container-translate-y': '-180px',
+                  '--date-container-translate-y': '-150px',
                   '--date-container-margin-top': '0rem',
                   '--date-main-size': 'text-xl',
                   '--date-sub-size': 'text-lg',
@@ -127,7 +127,7 @@ const App: React.FC = () => {
                   
                   // Button controls
                   '--button-translate-x': '0px',
-                  '--button-translate-y': '-170px',
+                  '--button-translate-y': '-150px',
                   '--button-margin-top': '1rem',
                   '--button-padding-y': '0.75rem',
                   '--button-padding-x': '1.5rem',
