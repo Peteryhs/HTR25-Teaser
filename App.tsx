@@ -98,13 +98,13 @@ const App: React.FC = () => {
                   '--logo-width': '600px',
                   '--logo-height': '600px',
                   '--logo-translate-x': '0px',
-                  '--logo-translate-y': '30px',
+                  '--logo-translate-y': '100px',
                   '--logo-margin-top': '0px',
-                  '--logo-margin-bottom': '0px',
+                  '--logo-margin-bottom': '-20px',
                   
                   // Text controls
-                  '--hack-text-size': 'clamp(3.5rem, 8vw, 4rem)',
-                  '--year-text-size': 'clamp(5.5rem, 8vw, 4rem)',
+                  '--hack-text-size': 'clamp(3rem, 8vw, 4rem)',
+                  '--year-text-size': 'clamp(5rem, 8vw, 4rem)',
                   '--text-gap': '1rem',
                   '--hack-margin-top': '0px',
                   '--hack-margin-bottom': '0px',
@@ -113,21 +113,21 @@ const App: React.FC = () => {
                   '--hack-translate-x': '0px',
                   '--hack-translate-y': '-80px',
                   '--year-translate-x': '0px',
-                  '--year-translate-y': '-90px',
+                  '--year-translate-y': '-150px',
                   '--title-container-translate-x': '0px',
                   '--title-container-translate-y': '0px',
                   
                   // Date section controls
                   '--date-container-translate-x': '0px',
-                  '--date-container-translate-y': '-90px',
-                  '--date-container-margin-top': '1rem',
+                  '--date-container-translate-y': '-180px',
+                  '--date-container-margin-top': '0rem',
                   '--date-main-size': 'text-xl',
                   '--date-sub-size': 'text-lg',
                   '--date-spacing': '0.5rem',
                   
                   // Button controls
                   '--button-translate-x': '0px',
-                  '--button-translate-y': '-70px',
+                  '--button-translate-y': '-170px',
                   '--button-margin-top': '1rem',
                   '--button-padding-y': '0.75rem',
                   '--button-padding-x': '1.5rem',
@@ -162,7 +162,7 @@ const App: React.FC = () => {
                       fontFamily: "'Sacco', 'Righteous', sans-serif",
                       fontSize: 'var(--hack-text-size)',
                       textShadow: '0px 0px 20px rgba(0,0,0,0.5)',
-                      letterSpacing: '0em',
+                      letterSpacing: '-0.05em',
                       marginTop: 'var(--hack-margin-top)',
                       marginBottom: 'var(--hack-margin-bottom)',
                       transform: 'translate(var(--hack-translate-x), var(--hack-translate-y))'
@@ -200,7 +200,7 @@ const App: React.FC = () => {
                     className="font-bold"
                     style={{ 
                       fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-                      fontSize: '1.25rem' // equivalent to text-xl
+                      fontSize: '1rem' // equivalent to text-xl
                     }}
                   >
                     Coming December 2025
@@ -208,7 +208,7 @@ const App: React.FC = () => {
                   <SimpleText 
                     style={{ 
                       fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-                      fontSize: '1.125rem' // equivalent to text-lg
+                      fontSize: '0.8rem' // equivalent to text-lg
                     }}
                   >
                     Iroquois Ridge Highschool
@@ -236,13 +236,13 @@ const App: React.FC = () => {
                 </a>
               </div>
               
-              {/* Copyright - absolute bottom */}
-              <div 
-                className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white/70 text-xs px-4 text-center" 
-                style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", letterSpacing: '0.05em' }}
-              >
+                {/* Copyright - absolute bottom */}
+                <div 
+                className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-white/60 text-[7px] px-2 text-center"
+                style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", letterSpacing: '0.04em' }}
+                >
                 © 2025 Hack the Ridge. Designed & Built by Jerry and Peter
-              </div>
+                </div>
             </div>
           </div>
         </div>
