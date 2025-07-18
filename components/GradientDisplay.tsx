@@ -174,7 +174,7 @@ const GradientDisplay: React.FC<{ isMobile?: boolean }> = ({ isMobile = false })
       {!isMobile && (
         <div 
           className="absolute inset-0 flex flex-col items-center justify-center text-center p-1" 
-          style={{ paddingTop: '6%' }}
+          style={{ paddingTop: '4%' }}
         >
           {/* Main Title Text */}
           <h1
@@ -199,7 +199,7 @@ const GradientDisplay: React.FC<{ isMobile?: boolean }> = ({ isMobile = false })
           className="absolute font-bold text-white"
           style={{
             fontFamily: 'var(--special-font, "VT323", monospace)',
-            bottom: 'clamp(0.5rem, 3vh, 2rem)',
+            bottom: 'clamp(0.1rem, 2vh, 1.5rem)',
             right: 'clamp(1rem, 4vw, 4rem)',
             fontSize: 'clamp(3rem, 8vw, 10rem)',
             zIndex: 1,

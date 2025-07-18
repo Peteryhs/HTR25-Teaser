@@ -211,7 +211,7 @@ const App: React.FC = () => {
                       fontSize: '0.8rem' // equivalent to text-lg
                     }}
                   >
-                    Iroquois Ridge Highschool
+                    Iroquois Ridge High School
                   </SimpleText>
                 </div>
                 
