@@ -162,7 +162,7 @@ const App: React.FC = () => {
                       fontFamily: "'Sacco', 'Righteous', sans-serif",
                       fontSize: 'var(--hack-text-size)',
                       textShadow: '0px 0px 20px rgba(0,0,0,0.5)',
-                      letterSpacing: '-0.05em',
+                      letterSpacing: '-0.02em',
                       marginTop: 'var(--hack-margin-top)',
                       marginBottom: 'var(--hack-margin-bottom)',
                       transform: 'translate(var(--hack-translate-x), var(--hack-translate-y))'
