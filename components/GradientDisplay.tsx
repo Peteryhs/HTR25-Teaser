@@ -35,7 +35,7 @@ const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 /*                               COMPONENT                            */
 /* ------------------------------------------------------------------ */
 
-const GradientDisplay: React.FC = () => {
+const GradientDisplay: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
   /* -------------------------------------------------------------- *
      1.  Prepare the blobs (memoised so values stay stable)
   * -------------------------------------------------------------- */
@@ -170,38 +170,45 @@ const GradientDisplay: React.FC = () => {
     >
       {blobs.map(b => <div key={b.id} className={b.id} />)}
 
-      {/* Text Overlay Container */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-1" style={{ paddingTop: '6%' }}>
-        {/* Main Title Text */}
-        <h1
-          className="text-white uppercase"
+      {/* Text Overlay Container - hidden on mobile since text is handled in App.tsx */}
+      {!isMobile && (
+        <div 
+          className="absolute inset-0 flex flex-col items-center justify-center text-center p-1" 
+          style={{ paddingTop: '6%' }}
+        >
+          {/* Main Title Text */}
+          <h1
+            className="text-white uppercase"
+            style={{
+              fontFamily: "'Sacco', 'Righteous', sans-serif", // Use Sacco, fallback to Righteous
+              fontSize: 'clamp(3.59rem, 17.25vw, 27rem)',
+              lineHeight: 1,
+              letterSpacing: '0.05em',
+              zIndex: 1,
+              textShadow: '0px 0px 15px rgba(0,0,0,0)',
+            }}
+          >
+            Hack The Ridge
+          </h1>
+        </div>
+      )}
+
+      {/* Year Text: Positioned bottom-right of the GradientDisplay - hidden on mobile */}
+      {!isMobile && (
+        <div
+          className="absolute font-bold text-white"
           style={{
-            fontFamily: "'Sacco', 'Righteous', sans-serif", // Use Sacco, fallback to Righteous
-            fontSize: 'clamp(8rem, 48vw, 27rem)',
-            lineHeight: 1,
-            letterSpacing: '0.05em',
+            fontFamily: 'var(--special-font, "VT323", monospace)',
+            bottom: 'clamp(0.5rem, 3vh, 2rem)',
+            right: 'clamp(1rem, 4vw, 4rem)',
+            fontSize: 'clamp(3rem, 8vw, 10rem)',
             zIndex: 1,
-            textShadow: '0px 0px 15px rgba(0,0,0,0)',
+            textShadow: '0px 0px 10px rgba(0,0,0,0.2)',
           }}
         >
-          Hack The Ridge
-        </h1>
-      </div>
-
-      {/* Year Text: Positioned bottom-right of the GradientDisplay */}
-      <div
-        className="absolute font-bold text-white"
-        style={{
-          fontFamily: 'var(--special-font, "VT323", monospace)',
-          bottom: 'clamp(1rem, 4vh, 2rem)',
-          right: 'clamp(2rem, 6vw, 4rem)',
-          fontSize: 'clamp(8rem, 16vw, 10rem)',
-          zIndex: 1,
-          textShadow: '0px 0px 10px rgba(0,0,0,0.2)',
-        }}
-      >
-        2025
-      </div>
+          2025
+        </div>
+      )}
     </div>
   );
 };

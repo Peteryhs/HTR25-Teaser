@@ -4,8 +4,30 @@ import GradientDisplay from './components/GradientDisplay';
 import logo from './assets/logo.png';
 
 const App: React.FC = () => {
-  // All font is Inter except for special font spots
-  // TypewriterText component for typewriter effect
+  // Detect if user is on a mobile device
+  const [isMobile, setIsMobile] = React.useState(false);
+  
+  React.useEffect(() => {
+    const checkIfMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(userAgent);
+      const isSmallScreen = window.innerWidth <= 768;
+      const isTouchDevice = 'ontouchstart' in window;
+      
+      setIsMobile(isMobileDevice || (isSmallScreen && isTouchDevice));
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  // Simple text component without animations for mobile
+  const SimpleText: React.FC<{ children: React.ReactNode; className?: string; style?: React.CSSProperties }> = ({ children, className, style }) => {
+    return <div className={className} style={style}>{children}</div>;
+  };
+
+  // TypewriterText component for typewriter effect (desktop only)
   const TypewriterText: React.FC<{ lines: string[]; className?: string }> = ({ lines, className }) => {
     const [displayed, setDisplayed] = React.useState(['', '']);
     const [lineIdx, setLineIdx] = React.useState(0);
@@ -47,7 +69,7 @@ const App: React.FC = () => {
           {renderFirstLine()}
           {lineIdx === 0 && <span className="type-cursor">|</span>}
         </div>
-        <div className="text-2xl sm:text-3xl mt-2" style={schoolFont}>
+        <div className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl mt-2" style={schoolFont}>
           {displayed[1]}
           {lineIdx === 1 && <span className="type-cursor">|</span>}
         </div>
@@ -55,73 +77,180 @@ const App: React.FC = () => {
     );
   };
 
-  // Upward scrolling carousel for event stats
-  const stats = [
-    "500+ Registrants",
-    "$6000+ in prizes",
-    "5+ Workshops",
-    "Celebrating a Decade of Innovation"
-  ];
-
-  // Manual height control for carousel positioning (adjust this value to move it up/down)
-  const carouselBottomOffset = 5; // Change this value: positive moves up, negative moves down
-
-  const Carousel: React.FC = () => {
-    const interFont = { fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontWeight: 700 };
-    return (
-      <div 
-        className="absolute left-1/2 -translate-x-1/2 h-48 w-full flex justify-center items-center pointer-events-none select-none z-10 carousel-fade-in"
-        style={{ bottom: `${carouselBottomOffset}px` }}
-      >
-        <div style={{height: '4.5rem', overflow: 'hidden', minWidth: '500px', maxWidth: '95vw', width: 'max-content'}}>
-          <div className="carousel-anim text-center text-3xl sm:text-5xl font-semibold text-sky-700" style={{...interFont, lineHeight: '4.5rem', whiteSpace: 'nowrap'}}>
-            {stats.concat(stats[0]).map((item, i) => (
-              <div key={i} style={interFont}>{item}</div>
-            ))}
+  return (
+    <>
+      {isMobile ? (
+        // Mobile-specific layout - full screen gradient with centered content and margin
+        <div className="h-screen p-2 bg-[#fff0d9]">
+          <div className="h-full relative overflow-hidden rounded-lg">
+            {/* Full screen gradient background */}
+            <div className="absolute inset-0">
+              <GradientDisplay isMobile={isMobile} />
+            </div>
+            
+            {/* Centered content overlay */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+              {/* Main content container */}
+              <div 
+                className="flex flex-col items-center space-y-6"
+                style={{
+                  // Logo controls
+                  '--logo-width': '600px',
+                  '--logo-height': '600px',
+                  '--logo-translate-x': '0px',
+                  '--logo-translate-y': '30px',
+                  '--logo-margin-top': '0px',
+                  '--logo-margin-bottom': '0px',
+                  
+                  // Text controls
+                  '--hack-text-size': 'clamp(3.5rem, 8vw, 4rem)',
+                  '--year-text-size': 'clamp(5.5rem, 8vw, 4rem)',
+                  '--text-gap': '1rem',
+                  '--hack-margin-top': '0px',
+                  '--hack-margin-bottom': '0px',
+                  '--year-margin-top': '0px',
+                  '--year-margin-bottom': '0px',
+                  '--hack-translate-x': '0px',
+                  '--hack-translate-y': '-80px',
+                  '--year-translate-x': '0px',
+                  '--year-translate-y': '-90px',
+                  '--title-container-translate-x': '0px',
+                  '--title-container-translate-y': '0px',
+                  
+                  // Date section controls
+                  '--date-container-translate-x': '0px',
+                  '--date-container-translate-y': '-90px',
+                  '--date-container-margin-top': '1rem',
+                  '--date-main-size': 'text-xl',
+                  '--date-sub-size': 'text-lg',
+                  '--date-spacing': '0.5rem',
+                  
+                  // Button controls
+                  '--button-translate-x': '0px',
+                  '--button-translate-y': '-70px',
+                  '--button-margin-top': '1rem',
+                  '--button-padding-y': '0.75rem',
+                  '--button-padding-x': '1.5rem',
+                  '--button-font-size': 'text-lg',
+                } as React.CSSProperties}
+              >
+                {/* Large logo at top */}
+                <img 
+                  src={logo} 
+                  alt="Logo" 
+                  className="object-contain"
+                  style={{ 
+                    width: 'var(--logo-width)',
+                    height: 'var(--logo-height)',
+                    transform: 'translate(var(--logo-translate-x), var(--logo-translate-y))',
+                    marginTop: 'var(--logo-margin-top)',
+                    marginBottom: 'var(--logo-margin-bottom)'
+                  }}
+                />
+                
+                {/* Title line - HACK THE RIDGE 2025 */}
+                <div 
+                  className="flex items-center justify-center flex-wrap gap-4"
+                  style={{
+                    gap: 'var(--text-gap)',
+                    transform: 'translate(var(--title-container-translate-x), var(--title-container-translate-y))'
+                  }}
+                >
+                  <h1 
+                    className="text-white uppercase font-bold"
+                    style={{ 
+                      fontFamily: "'Sacco', 'Righteous', sans-serif",
+                      fontSize: 'var(--hack-text-size)',
+                      textShadow: '0px 0px 20px rgba(0,0,0,0.5)',
+                      letterSpacing: '0em',
+                      marginTop: 'var(--hack-margin-top)',
+                      marginBottom: 'var(--hack-margin-bottom)',
+                      transform: 'translate(var(--hack-translate-x), var(--hack-translate-y))'
+                    }}
+                  >
+                    HACK THE RIDGE
+                  </h1>
+                  <div 
+                    className="text-white font-bold"
+                    style={{ 
+                      fontFamily: "'VT323', monospace",
+                      fontSize: 'var(--year-text-size)',
+                      textShadow: '0px 0px 15px rgba(0,0,0,0.4)',
+                      marginTop: 'var(--year-margin-top)',
+                      marginBottom: 'var(--year-margin-bottom)',
+                      transform: 'translate(var(--year-translate-x), var(--year-translate-y))'
+                    }}
+                  >
+                    2025
+                  </div>
+                </div>
+                
+                {/* Date and location */}
+                <div 
+                  className="text-white"
+                  style={{ 
+                    gap: 'var(--date-spacing)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    transform: 'translate(var(--date-container-translate-x), var(--date-container-translate-y))',
+                    marginTop: 'var(--date-container-margin-top)'
+                  }}
+                >
+                  <SimpleText 
+                    className="font-bold"
+                    style={{ 
+                      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontSize: '1.25rem' // equivalent to text-xl
+                    }}
+                  >
+                    Coming December 2025
+                  </SimpleText>
+                  <SimpleText 
+                    style={{ 
+                      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                      fontSize: '1.125rem' // equivalent to text-lg
+                    }}
+                  >
+                    Iroquois Ridge Highschool
+                  </SimpleText>
+                </div>
+                
+                {/* Archive button */}
+                <a
+                  href="https://2024.hacktheridge.ca"
+                  style={{ 
+                    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", 
+                    fontWeight: 700,
+                    transform: 'translate(var(--button-translate-x), var(--button-translate-y))',
+                    marginTop: 'var(--button-margin-top)',
+                    paddingTop: 'var(--button-padding-y)',
+                    paddingBottom: 'var(--button-padding-y)',
+                    paddingLeft: 'var(--button-padding-x)',
+                    paddingRight: 'var(--button-padding-x)',
+                    fontSize: '1.125rem' // equivalent to text-lg
+                  }}
+                  className="inline-block bg-white/90 hover:bg-white text-sky-800 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-150 ease-in-out"
+                  aria-label="Visit 2024 Hack the Ridge Archive"
+                >
+                  2024 Archive &rarr;
+                </a>
+              </div>
+              
+              {/* Copyright - absolute bottom */}
+              <div 
+                className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white/70 text-xs px-4 text-center" 
+                style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", letterSpacing: '0.05em' }}
+              >
+                © 2025 Hack the Ridge. Designed & Built by Jerry and Peter
+              </div>
+            </div>
           </div>
         </div>
-        <style>{`
-          .carousel-fade-in {
-            animation: carouselFadeIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) 1.2s both;
-          }
-          @keyframes carouselFadeIn {
-            0% { opacity: 0; transform: translateX(-50%) translateY(30px) scale(0.95); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
-          }
-          .carousel-anim {
-            display: flex;
-            flex-direction: column;
-            animation: scrollUpPremium 12s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-          }
-          .carousel-anim > div {
-            transition: opacity 0.6s ease-in-out;
-          }
-          @keyframes scrollUpPremium {
-            0% { transform: translateY(0); opacity: 1; }
-            22% { transform: translateY(0); opacity: 1; }
-            25% { transform: translateY(-4.5rem); opacity: 0.95; }
-            27% { opacity: 1; }
-            47% { transform: translateY(-4.5rem); opacity: 1; }
-            50% { transform: translateY(-9rem); opacity: 0.95; }
-            52% { opacity: 1; }
-            72% { transform: translateY(-9rem); opacity: 1; }
-            75% { transform: translateY(-13.5rem); opacity: 0.95; }
-            77% { opacity: 1; }
-            97% { transform: translateY(-13.5rem); opacity: 1; }
-            100% { transform: translateY(0); opacity: 1; }
-          }
-        `}</style>
-      </div>
-    );
-  };
-
-  return (
-    <div className="h-screen bg-[#fff0d9] pt-16 pr-16 pl-16 pb-48 relative">
+      ) : (
+        // Desktop layout (existing)
+        <div className="h-screen bg-[#fff0d9] pt-4 pr-4 pl-4 pb-32 sm:pt-8 sm:pr-8 sm:pl-8 sm:pb-40 lg:pt-16 lg:pr-16 lg:pl-16 lg:pb-48 relative">
       {/* FontSwitcher removed */}
-      <GradientDisplay />
-      <Carousel />
-      
-      {/* Animation Styles */}
+              <GradientDisplay isMobile={isMobile} />      {/* Animation Styles */}
       <style>
         {`
           @keyframes logoColorShift {
@@ -161,44 +290,65 @@ const App: React.FC = () => {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
           }
+          
+          /* Responsive logo positioning */
+          .logo-animated {
+            --logo-offset-y: clamp(-5vh, 10vw, 35vh); /* Moved down by about 10% more */
+            --logo-margin-top: clamp(50vh, 60vw, 500px); /* Moved down significantly */
+          }
+          
+          @media (min-width: 640px) {
+            .logo-animated {
+              --logo-offset-y: clamp(0vh, 15vw, 40vh); /* 10% lower than before */
+              --logo-margin-top: clamp(55vh, 65vw, 550px); /* 10% lower */
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .logo-animated {
+              --logo-offset-y: clamp(5vh, 20vw, 45vh); /* 10% lower - was -5vh to 35vh, now 5vh to 45vh */
+              --logo-margin-top: clamp(60vh, 70vw, 600px); /* 10% lower */
+            }
+          }
         `}
       </style>
       
       {/* Logo - centered within gradient area */}
-      <div className="absolute inset-x-0 top-0 bottom-48 overflow-hidden flex items-center justify-center z-10">
+      <div className="absolute inset-x-0 top-0 bottom-32 sm:bottom-40 lg:bottom-48 overflow-hidden flex items-center justify-center z-10">
         <img 
           src={logo} 
           alt="Logo" 
-          className="w-[48vw] h-auto logo-animated"
+          className="w-[70vw] sm:w-[60vw] lg:w-[48vw] h-auto logo-animated"
           style={{
-            // Positioning options - adjust these values to move the logo
-            transform: 'translate(0, -750)', // Change to translate(x, y) to move left/right/up/down
-            // Alternative positioning options (uncomment to use):
-            marginTop: '750px',    // Positive moves down, negative moves up
-            // marginLeft: '0px',   // Positive moves right, negative moves left
+            // Responsive positioning using CSS custom properties
+            transform: 'translate(0, var(--logo-offset-y))', 
+            marginTop: 'var(--logo-margin-top)',
           }}
         />
       </div>
-      <div className="absolute left-16 bottom-0 h-48 flex items-center fadeUpLeft"> {/* Coming December text - left aligned */}
+      <div className="absolute left-2 sm:left-8 lg:left-16 bottom-0 h-32 sm:h-40 lg:h-48 flex items-center fadeUpLeft"> {/* Coming December text - left aligned */}
         <TypewriterText
           lines={["Coming December 2025", "Iroquois Ridge Highschool"]}
-          className="text-4xl sm:text-5xl text-sky-800"
+          className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-sky-800"
         />
       </div>
-      <div className="absolute right-16 bottom-0 h-48 flex items-center fadeUpRight"> {/* Vertically centered in bottom margin */}
+      <div className="absolute right-2 sm:right-8 lg:right-16 bottom-0 h-32 sm:h-40 lg:h-48 flex items-center fadeUpRight"> {/* Vertically centered in bottom margin */}
       <a
         href="https://2024.hacktheridge.ca"
         style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontWeight: 700 }}
-        className="text-3xl sm:text-4xl bg-sky-200 hover:bg-sky-300 text-sky-800 font-semibold py-6 px-16 rounded-full shadow-md hover:shadow-lg transition-all duration-150 ease-in-out"
+        className="text-sm sm:text-lg md:text-xl lg:text-2xl xl:text-3xl bg-sky-200 hover:bg-sky-300 text-sky-800 font-semibold py-2 px-4 sm:py-3 sm:px-6 lg:py-6 lg:px-16 rounded-full shadow-md hover:shadow-lg transition-all duration-150 ease-in-out"
         aria-label="Visit 2024 Hack the Ridge Archive"
       >
-        Visit 2024 Archive &rarr;
+        <span className="hidden sm:inline">Visit 2024 Archive &rarr;</span>
+        <span className="sm:hidden">2024 Archive &rarr;</span>
       </a>
       </div>
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs px-4 py-1 rounded z-0" style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", letterSpacing: '0.05em', background: 'none', boxShadow: 'none', color: "#bea883" }}>
         © 2025 Hack the Ridge. Designed & Built by Jerry and Peter
       </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

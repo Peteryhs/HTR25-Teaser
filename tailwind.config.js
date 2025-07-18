@@ -8,7 +8,13 @@ module.exports = {
     "./hooks/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      lineHeight: {
+        '12': '3rem',
+        '16': '4rem', 
+        '20': '5rem',
+      }
+    },
   },
   plugins: [],
 }
