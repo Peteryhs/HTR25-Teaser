@@ -328,13 +328,13 @@ const App: React.FC = () => {
       </div>
       <div className="absolute left-2 sm:left-8 lg:left-16 bottom-0 h-32 sm:h-40 lg:h-48 flex items-center fadeUpLeft"> {/* Coming December text - left aligned */}
         <TypewriterText
-          lines={["Coming December 2025", "Iroquois Ridge Highschool"]}
+          lines={["Coming December 2025", "Iroquois Ridge High School"]}
           className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-sky-800"
         />
       </div>
       <div className="absolute right-2 sm:right-8 lg:right-16 bottom-0 h-32 sm:h-40 lg:h-48 flex items-center fadeUpRight"> {/* Vertically centered in bottom margin */}
       <a
-        href="https://2024.hacktheridge.ca"
+        href="https://web.archive.org/web/20250401072116/https://www.hacktheridge.ca/"
         style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", fontWeight: 700 }}
         className="text-sm sm:text-lg md:text-xl lg:text-2xl xl:text-3xl bg-sky-200 hover:bg-sky-300 text-sky-800 font-semibold py-2 px-4 sm:py-3 sm:px-6 lg:py-6 lg:px-16 rounded-full shadow-md hover:shadow-lg transition-all duration-150 ease-in-out"
         aria-label="Visit 2024 Hack the Ridge Archive"
