@@ -217,7 +217,7 @@ const App: React.FC = () => {
                 
                 {/* Archive button */}
                 <a
-                  href="https://2024.hacktheridge.ca"
+                  href="https://htr-2024-website.vercel.app/"
                   style={{ 
                     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", 
                     fontWeight: 700,
